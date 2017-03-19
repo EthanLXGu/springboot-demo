@@ -1,0 +1,31 @@
+server:
+  #port
+  port: 8082
+
+  # add a root path
+#  context-path: /girl
+
+# @value
+cupSize: B
+age: 18
+
+# properties using other value
+context: "cupSize: ${cupSize}, age: ${age}"
+
+#@confogurationProperties(prefix = "girl")
+girl:
+  cupSize: B
+  age: 18
+spring:
+  profiles:
+    active: dev
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/springs
+
+
