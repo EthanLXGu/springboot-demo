@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by lingxingu on 2017/3/18.
@@ -19,6 +20,17 @@ public class Girl {
 
     @Min(value = 18, message = "age should not be under 18")
     private Integer age;
+
+    @NotNull(message = "金额必传")
+    private Double money;
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(final Double money) {
+        this.money = money;
+    }
 
     public Girl() {
     }
@@ -53,6 +65,7 @@ public class Girl {
                 "id= " + id +
                 " cupSize=" + cupSize +
                 " age= " + age +
+                " money " + money +
                 "}";
     }
 }

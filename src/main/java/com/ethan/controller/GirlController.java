@@ -1,6 +1,8 @@
 package com.ethan.controller;
 
+import com.ethan.ResultUtil;
 import com.ethan.aspect.HttpAspect;
+import com.ethan.domain.Result;
 import com.ethan.repository.GirlRepository;
 import com.ethan.domain.Girl;
 import com.ethan.service.GirlService;
@@ -48,15 +50,29 @@ public class GirlController {
 //    }
 
     @PostMapping(value = "/girls")
-    public Girl girlAdd(@Valid Girl girl, BindingResult bindingResult) {
+    public Result<Girl> girlAdd(@Valid Girl girl, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+//            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+//            return null;
+//            return bindingResult.getFieldError().getDefaultMessage();
+
+//            Result result = new Result();
+//            result.setCode(1);
+//            result.setMsg(bindingResult.getFieldError().getDefaultMessage());
+            return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
+
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
+        girl.setMoney(girl.getMoney());
 
-        return girlRepository.save(girl);
+//        Result result = new Result();
+//        result.setCode(0);
+//        result.setMsg("Success");
+//        result.setData(girlRepository.save(girl));
+
+//        return girlRepository.save(girl);
+        return ResultUtil.success(girl);
     }
 
 
@@ -73,10 +89,12 @@ public class GirlController {
     @PutMapping(value = "girls/{id}")
     public Girl updateGirl(@PathVariable("id") final Integer id,
                            @RequestParam("cupSize") final String cupSize,
-                           @RequestParam("age") final Integer age) {
+                           @RequestParam("age") final Integer age,
+                           @RequestParam("money") final Double money) {
         Girl girl = girlRepository.findOne(id);
         girl.setCupSize(cupSize);
         girl.setAge(age);
+        girl.setMoney(money);
         return girl;
     }
 
@@ -88,5 +106,10 @@ public class GirlController {
     @PostMapping(value = "girls/two")
     public void girlTwo() {
         girlService.insertTwoData();
+    }
+
+    @GetMapping(value = "girls/getAge/{id}")
+    public void getAge(@PathVariable("id") final Integer id) throws Exception{
+        girlService.getAge(id);
     }
 }
