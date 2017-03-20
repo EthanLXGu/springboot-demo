@@ -1,8 +1,11 @@
 package com.ethan.controller;
 
+import com.ethan.aspect.HttpAspect;
 import com.ethan.repository.GirlRepository;
 import com.ethan.domain.Girl;
 import com.ethan.service.GirlService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +14,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Created by lingxingu on 2017/3/18.
+ * Created by Ethan L X Gu on 2017/3/18.
  */
 @RestController
 public class GirlController {
+
+    private final static Logger logger = LoggerFactory.getLogger(GirlController.class);
 
     private final GirlRepository girlRepository;
 
@@ -28,6 +33,8 @@ public class GirlController {
 
     @GetMapping(value = "/girls")
     public List<Girl> girlList() {
+//        System.out.println("girl list");
+        logger.info("girlList");
         return girlRepository.findAll();
     }
 

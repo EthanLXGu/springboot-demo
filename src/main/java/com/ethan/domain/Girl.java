@@ -46,4 +46,13 @@ public class Girl {
     public void setAge(final Integer age) {
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return "Girl{" +
+                "id= " + id +
+                " cupSize=" + cupSize +
+                " age= " + age +
+                "}";
+    }
 }
