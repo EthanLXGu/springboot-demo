@@ -49,4 +49,8 @@ public class GirlService {
             throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
         }
     }
+
+    public Girl findOne(Integer id) {
+        return girlRepository.findOne(id);
+    }
 }
